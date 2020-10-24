@@ -19,7 +19,33 @@ router.get('/', (req, res) =>
         .catch(err => console.log(err))
 
 );
-//Add Info
+
+//get info by id
+router.get('/:id', async (req, res) => {
+    const id = req.params.id
+
+    return await Gig.findOne({ id: id })
+
+        .then(gigs => {
+
+
+            console.log(gigs);
+            res.status(200).send(gigs);
+
+        })
+        .catch(err => console.log(err))
+
+    // console.log(req.params.id)
+});
+
+// router.get('/:id', (req, res) => {
+//     const id = req.params.id
+//     console.log(id)
+//     // await Gig.findByPk(gigID)
+
+
+// })
+//Add Info {
 
 router.get('/add', (req, res) => {
     const data = {
@@ -48,6 +74,6 @@ router.get('/add', (req, res) => {
         .then(gig => res.redirect('/gigs'))
         .catch(err => console.log(err));
 });
-
+//}
 
 module.exports = router;
